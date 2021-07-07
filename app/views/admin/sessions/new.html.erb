@@ -1,2 +1,26 @@
-<h1>Admin::Sessions#new</h1>
-<p>Find me in app/views/admin/sessions/new.html.erb</p>
+<div class="container"> 
+<h2 class="d-inlineblock bg-light mt-3">管理者ログイン</h2>
+<div class="col-md-8 mx-sm-auto  rounded my-3 p-4 ">
+ 
+  <%= form_with model: @customer,url: admin_sign_in_path,local:true do |f| %>
+   <div class="field form-group row">
+    <%= f.label :"メールアドレス" ,class:"col-sm-4 col-form-label"%>
+    <div class="col-sm-8">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control" %>
+    </div>
+  </div>
+  <div class="field form-group row">
+    <%= f.label :"パスワード",class:"col-sm-4 col-form-label" %>
+    <div class="col-sm-8">
+    <%= f.password_field :password, autocomplete: "current-password",class:"form-control" %>
+    </div>
+  </div>
+    <div class="actions row">
+      <div class="col-sm-4"></div>
+      <div class="col-4">
+      <%= f.submit "ログイン",class:"btn-block btn btn-primary " %>
+      </div>
+    </div>
+    <% end %>
+</div>
+</div>
