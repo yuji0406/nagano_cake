@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :admins
   devise_for :customers
 
   scope module: :public do
     root to:'homes#top'
     get 'homes/about' => 'homes#about'
-    resource :customers,only:[:show,:edit,:update]
+    resource :customers,only:[:edit,:update]
+      get 'customers/mypage' => 'customers#show'
       get 'customers/check' => 'customers#check'
       patch 'customers/withdraw' => 'customers#withdraw'
     resources :items,only:[:index,:show]

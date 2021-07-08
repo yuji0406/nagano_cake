@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+  layout 'public'
   def index
   end
 
