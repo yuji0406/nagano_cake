@@ -1,8 +1,8 @@
 <div class="container">
-<h2 class="d-inlineblock bg-light mt-3">管理者ログイン</h2>
+<h2 class="d-inline-block bg-light mt-3">管理者ログイン</h2>
 <div class="col-md-8 mx-sm-auto  rounded my-3 p-4 ">
 
-  <%= form_with model: @customer,url: admin_sign_in_path,local:true do |f| %>
+  <%= form_with model: @customer,url: admin_session_path,local:true do |f| %>
    <div class="field form-group row">
     <%= f.label :"メールアドレス" ,class:"col-sm-4 col-form-label"%>
     <div class="col-sm-8">

@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, controllers:{
+    sessions: 'admins/sessions'
+  }
+   devise_scope :admins do
+    get "sign_in", :to => "admins/sessions#new"
+    get "sign_out", :to => "admins/sessions#destroy" 
+  end
+  
   devise_for :customers
 
   scope module: :public do
@@ -18,10 +25,7 @@ Rails.application.routes.draw do
     resources :addresses,except:[:show,:new]
   end
   namespace :admin do
-    get '/sign_in' => 'sessions#new'
-    post '/sign_in' => 'sessions#create'
-    delete '/sign_out' => 'sessions#destroy'
-    get '/' => "homes#top"
+     get '/' => "homes#top"
     resources :items,except:[:destroy]
     resources :genres,only:[:index,:create,:edit,:update]
     resources :customers,only:[:index,:show,:edit,:update]
