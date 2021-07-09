@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  attachment :image_id
+  attachment :image_
   
   has_many :cart_items
   has_many :order_items
