@@ -6,6 +6,7 @@ class Admin::ItemsController < ApplicationController
 
   def new
     @items=Item.new
+    
   end
 
   def show
@@ -15,9 +16,20 @@ class Admin::ItemsController < ApplicationController
   end
 
   def create
+    @items=Item.new(item_params)
+    if @items.save
+      redirect to admin_items_path
+    else
+      render :new
+    end
   end
 
   def update
   end
-
+  
+  private
+  
+  def item_params
+    params.require(:item).permit(:image,:name,:introduction,:genre_id,:price,:is_active)
+  end
 end

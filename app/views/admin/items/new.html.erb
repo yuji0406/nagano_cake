@@ -6,7 +6,7 @@
    <div class="field form-group row">
     <%= f.label :"商品画像" ,class:"col-sm-4 col-form-label"%>
     <div class="col-sm-8">
-    <%= f.attachment_field :image,class:"form-control" %>
+    <%= f.attachment_field :image %>
     </div>
   </div>
    <div class="field form-group row">
@@ -24,15 +24,15 @@
    <div class="field form-group row">
     <%= f.label :"ジャンル" ,class:"col-sm-4 col-form-label"%>
     <div class="col-sm-8">
-    <%= f.collection_select :genre_id,Genre.all,:id,:name, include_blank: "--選択して下さい--",class:"form-control" %>
+    <%= f.collection_select(:genre_id,Genre.all,:id,:name,{prompt:"--選択して下さい--"},{class:"form-control"}) %>
     </div>
   </div>
   <div class="field form-group row">
     <%= f.label :"税抜価格",class:"col-sm-4 col-form-label" %>
     <div class="col-sm-8">
-    <%= f.text_field :price,class:"form-control" %>
+    <%= f.text_field :price,class:"form-control" %>円
     </div>
-    <span>円</span>
+
   </div>
    <div class="field form-group row">
     <%= f.label :"販売ステータス" ,class:"col-sm-4 col-form-label"%>
