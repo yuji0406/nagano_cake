@@ -10,7 +10,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
-    @item=Item.find_by(id:params[:id])
+    @item=Item.find(params[:id])
     @tax=1.1
     @tax_price=@tax*@item.price
 
@@ -18,7 +18,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
-    @item=Item.find_by(id:params[:id])
+    @item=Item.find(params[:id])
 
   end
 
@@ -32,7 +32,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-    @item=Item.find_by(params[:id])
+    @item=Item.find(params[:id])
     @item.update(item_params)
     redirect_to admin_item_path(@item.id)
   end
