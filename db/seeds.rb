@@ -10,3 +10,22 @@ Admin.create!(
   email: "ky19930305@gmail.com",
   password: "uverworld"
   )
+  
+ 15.times do |n|
+ Customer.create!(
+      email: "test#{n + 1}@test.com",
+      last_name: "テスト#{n + 1}",
+      first_name: "太郎#{n + 1}",
+      password: "111111",
+      is_active: "true",
+      postal_code: "000-0000",
+      address: "東京都xxx-xxxx",
+      telephone_number: "000-000-0000"
+    )
+  15.times do |n|
+    .create!(
+      email: "test#{n + 1}@test.com",
+      name: "テスト太郎#{n + 1}",
+    )
+  end
+  end
