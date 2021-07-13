@@ -6,10 +6,15 @@ class Admin::ItemsController < ApplicationController
 
   def new
     @items=Item.new
-    
+
   end
 
   def show
+    @item=Item.find_by(id:params[:id])
+    @tax=1.1
+    @tax_price=@tax*@item.price
+    
+    
   end
 
   def edit
@@ -18,7 +23,7 @@ class Admin::ItemsController < ApplicationController
   def create
     @items=Item.new(item_params)
     if @items.save
-      redirect to admin_items_path
+      redirect_to admin_items_path
     else
       render :new
     end
@@ -26,9 +31,9 @@ class Admin::ItemsController < ApplicationController
 
   def update
   end
-  
+
   private
-  
+
   def item_params
     params.require(:item).permit(:image,:name,:introduction,:genre_id,:price,:is_active)
   end
