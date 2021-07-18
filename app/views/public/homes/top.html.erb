@@ -1,2 +1,33 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container mt-3">
+  <div class="d-flex">
+    <%= render 'layouts/sidebar'%>
+     <div class="main-contents col-10">
+       <div class="top-view">
+         <div class="position-relative">
+         <%= image_tag "top.jpg",class:"top" %>
+           <div class="position-absolute py-3 bg-warning text-centerd">
+             <p class="text-white">ようこそ、ながのCAKEへ！<br>
+             このサイトは、ケーキ販売のECサイトになります。<br>
+             会員でない方も商品の閲覧はできますが、<br>
+             購入には会員登録が必要になります。</p>
+           </div>
+         </div>
+        </div>
+      <h3 class="m-3">新着商品</h3>
+        <div class="d-flex flex-wrap row">
+          <% @items.first(4).each do |item| %>
+          <div class="item-box col-auto px-1">
+               <%= link_to item_path(item.id) do %>
+          <%= attachment_image_tag item,:image,size:"200x100",format:'jpeg',fallback:"no_image.jpeg" %>
+          <% end %>
+            <%= item.name %>
+            ¥<%= item.price %>
+          </div>
+          <% end %>
+        </div>
+        <div class="text-right">
+          <%= link_to "全ての商品を見る >",items_path%>
+        </div>
+      </div>
+    </div>
+  </div>
