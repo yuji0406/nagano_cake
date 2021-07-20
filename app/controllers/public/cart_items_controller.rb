@@ -1,6 +1,7 @@
 class Public::CartItemsController < ApplicationController
   layout 'public'
   def index
+    @cart_item=CartItem.find()
     @cart_items=CartItem.where(customer_id:current_customer.id)
   end
 
@@ -15,13 +16,13 @@ class Public::CartItemsController < ApplicationController
 
   def create
     @cart_item=CartItem.new(cart_item_params)
-    @cart_item.save
+    @cart_item.save!
     redirect_to items_path
   end
 
   private
   def cart_item_params
-    params.require(:cart_item).permit(:amount)
+    params.require(:cart_item).permit(:amount,:customer_id,:item_id)
   end
 
 end
