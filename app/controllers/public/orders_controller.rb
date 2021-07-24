@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  layout 'public'
   def new
   end
 
@@ -10,12 +11,12 @@ class Public::OrdersController < ApplicationController
 
   def show
   end
-  
+
   def confirm
   end
-  
+
   def create
   end
-  
-  
+
+
 end

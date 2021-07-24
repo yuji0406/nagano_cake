@@ -1,61 +1,19 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'orders/show'
+  devise_for :admins, controllers:{
+    sessions: 'admins/sessions'
+  }
+   devise_scope :admins do
+    get "sign_in", :to => "admins/sessions#new"
+    get "sign_out", :to => "admins/sessions#destroy" 
   end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/show'
-    get 'items/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :admin do
-    get 'sessions/new'
-  end
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/complete'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/index'
-  end
-  namespace :public do
-    get 'cusomers/show'
-    get 'cusomers/edit'
-    get 'cusomers/update'
-    get 'cusomers/check'
-  end
-  namespace :public do
-    get 'items/indes'
-    get 'items/show'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
+  
   devise_for :customers
 
   scope module: :public do
     root to:'homes#top'
     get 'homes/about' => 'homes#about'
-    resource :customers,only:[:show,:edit,:update]
+    resource :customers,only:[:edit,:update]
+      get 'customers/mypage' => 'customers#show'
       get 'customers/check' => 'customers#check'
       patch 'customers/withdraw' => 'customers#withdraw'
     resources :items,only:[:index,:show]
@@ -67,10 +25,7 @@ Rails.application.routes.draw do
     resources :addresses,except:[:show,:new]
   end
   namespace :admin do
-    get '/sign_in' => 'session#new'
-    post '/sign_in' => 'session#create'
-    delete '/sign_out' => 'session#destroy'
-    get '/' => "homes#top"
+     get '/' => "homes#top"
     resources :items,except:[:destroy]
     resources :genres,only:[:index,:create,:edit,:update]
     resources :customers,only:[:index,:show,:edit,:update]

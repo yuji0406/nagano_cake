@@ -1,4 +1,5 @@
 class Public::CusomersController < ApplicationController
+  layout 'public'
   def show
   end
 
@@ -10,8 +11,8 @@ class Public::CusomersController < ApplicationController
 
   def check
   end
-  
+
   def withdraw
   end
-  
+
 end

@@ -1,0 +1,28 @@
+// Place all the styles related to the public controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+*{
+  box-sizing:border-box;
+}
+.position-absolute{
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 70%;
+  height: 200px;
+  margin: auto;
+  text-align: center;
+}
+.top{
+  width: 100%;
+}
+.top-view{
+  width: 100%;
+}
+.about{
+  width: 60%;
+}
+.about-title{
+  font-size: 50px;
+}
