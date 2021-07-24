@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
                                                       :first_name_kana,
                                                       :postal_code,
                                                       :address,
-                                                       :telephone_number])
+                                                      :telephone_number])
   end
 end

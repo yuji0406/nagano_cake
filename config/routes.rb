@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   }
    devise_scope :admins do
     get "sign_in", :to => "admins/sessions#new"
-    get "sign_out", :to => "admins/sessions#destroy" 
+    get "sign_out", :to => "admins/sessions#destroy"
   end
-  
-  devise_for :customers
+
+  devise_for :customers, controllers:{
+    sessions:'customers/sessions',
+    registrations:'customers/registrations'
+  }
+
 
   scope module: :public do
     root to:'homes#top'
