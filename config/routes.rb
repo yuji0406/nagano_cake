@@ -17,8 +17,8 @@ Rails.application.routes.draw do
       get 'customers/check' => 'customers#check'
       patch 'customers/withdraw' => 'customers#withdraw'
     resources :items,only:[:index,:show]
+     delete 'cart_items/empty' => 'cart_items#empty'
     resources :cart_items,except:[:new,:show,:edit]
-      delete 'cart_items/empty' => 'cart_items#empty'
     resources :orders,only:[:new,:create,:index,:show]
       post 'orders/confirm' => 'orders#confirm'
       get 'orders/complete' => 'orders#complete'
