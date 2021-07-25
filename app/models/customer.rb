@@ -11,6 +11,11 @@ class Customer < ApplicationRecord
   def full_name
     self.last_name+""+self.first_name
   end
+  
+  def full_name_kana
+    self.last_name_kana+""+self.first_name_kana
+  end
+  
   def postal_code_and_address
     "〒#{self.postal_code.to_s}"+self.address
   end

@@ -1,6 +1,7 @@
 class Public::CustomersController < ApplicationController
   layout 'public'
-  def show
+  def mypage
+
   end
 
   def edit
@@ -13,6 +14,9 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
+    current_customer.update(is_active: false)
+    reset_session
+    redirect_to root_path
   end
 
 end
