@@ -7,7 +7,7 @@
        <% @genres.each do |genre| %>
        <% form_with%>
       <div class="genre-box">
-        <%= link_to genre.name,items_path ,class:"text-dark"%>
+        <%= link_to genre.name,items_path(:genre_id => genre.id) ,class:"text-dark"%>
       </div>
       <% end %>
     </div>

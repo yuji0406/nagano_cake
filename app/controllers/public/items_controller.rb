@@ -1,9 +1,15 @@
 class Public::ItemsController < ApplicationController
-  
-  
+
+
   def index
     @genres=Genre.all
-    @items=Item.page(params[:page]).per(8)
+    if params[:genre_id]
+      genre=Genre.find(params[:genre_id])
+      @items=genre.items.page(params[:page]).per(8)
+    else
+      @items=Item.page(params[:page]).per(8)
+    end
+
   end
 
   def search
@@ -15,5 +21,5 @@ class Public::ItemsController < ApplicationController
     @genres=Genre.all
     @cart_item=CartItem.new
   end
-  
+
 end
