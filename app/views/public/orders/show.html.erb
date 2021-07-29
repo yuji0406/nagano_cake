@@ -1,2 +1,69 @@
-<h1>Public::Orders#show</h1>
-<p>Find me in app/views/public/orders/show.html.erb</p>
+ <div class="container-fluid mt-3">
+    <h3 class="d-inline-block bg-light">注文履歴詳細</h3>
+    <div class="d-flex">
+      <div class="order_info col-6">
+        <label>注文情報</label>
+        <table class="table-bordered w-100 mx-1">
+          <tr>
+            <td class="table-secondary">注文日</td>
+            <td><%= @order.created_at.to_s(:datetime_jp) %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">配送先</td>
+            <td><%= "〒#{@order.postal_code}" %><br>
+                <%= @order.order_address %><br>
+                <%= @order.name %>
+            </td>
+          </tr>
+          <tr>
+            <td class="table-secondary">支払方法</td>
+            <td><%= @order.payment %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">ステータス</td>
+            <td><%= @order.status %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="price_info col-3">
+        <label>請求情報</label>
+        <table class="table-bordered w-100">
+          <tr>
+            <td class="table-secondary">商品合計</td>
+            <td><%= @order.total_price.to_s(:delimited)%></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">配送料</td>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">ご請求金額</td>
+            <td><%= (@order.total_price+@order.postage).to_s(:delimited) %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="col-7">
+      <label>注文内容</label>
+      <table class="table-bordered w-100">
+        <thead>
+          <tr class="table-secondary">
+            <th style="width:60%">商品</th>
+            <th style="width:20%">単価（税込）</th>
+            <th style="width:10%">個数</th>
+            <th style="width:10%">小計</th>
+          </tr>
+        </thead>
+        <% @order_items.each do |order_item|%>
+        <tr>
+          <td><%= order_item.item.name %></td>
+          <td><%= order_item.item.tax_price.to_s(:delimited) %></td>
+          <td><%= order_item.amount %></td>
+          <td><%= (order_item.item.tax_price*order_item.amount).to_s(:delimited) %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>

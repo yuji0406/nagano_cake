@@ -1,6 +1,6 @@
  <div class="container mt-3">
     <h3 class="d-inline-block bg-light">注文履歴一覧</h3>
-    <table class="table mt-3">
+    <table class="table-bordered mt-3 w-100">
       <thead>
         <tr class="table-secondary">
           <th>注文日</th>
@@ -13,17 +13,18 @@
       </thead>
       <% current_customer.orders.each do |order| %>
       <tr>
-        <td><%= order.created_at %></td>
+        <td><%= order.created_at.to_s(:datetime_jp) %></td>
         <td><%= "〒#{order.postal_code}" %><br>
             <%= order.order_address %><br>
             <%= order.name %>
         </td>
         <td><% order.order_items.each do |order_item| %>
             <%= order_item.item.name %>
+            <br>
             <% end %></td>
         <td><%= "#{order.total_price}円" %></td>
         <td><%= order.status %></td>
-        <td><%= link_to"表示する",order_path(order),class:"btn btn-primary" %></td>
+        <td class="text-center"><%= link_to"表示する",order_path(order),class:"btn btn-primary" %></td>
       </tr>
       <% end %>
     </table>

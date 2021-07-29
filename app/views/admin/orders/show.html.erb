@@ -5,19 +5,19 @@
       <p>購入者</p>
     </div>
     <div class="col-8">
-      <%= link_to @order.customer.full_name,admin_customer_path(@customer.id) %>
+      <%= link_to @order.customer.full_name,admin_customer_path(@order.customer.id) %>
     </div>
     <div class="col-4">
       <p>注文日</p>
     </div>
     <div class="col-8">
-      <%= @order.created_at %>
+      <%= @order.created_at.to_s(:datetime_jp) %>
     </div>
     <div class="col-4">
       <p>配送先</p>
     </div>
     <div class="col-8">
-      <%= "〒#{@order.postal_code}　#{@order.address}" %><br />
+      <%= "〒#{@order.postal_code}　#{@order.order_address}" %><br />
       <%= @order.name %>
     </div>
     <div class="col-4">
@@ -26,20 +26,21 @@
     <div class="col-8">
       <%=@order.payment %>
     </div>
-    <%= form_with model:@order,url: admin_order_path do |f| %>
+    <%= form_with model:@order,url: admin_order_path,local: true do |f| %>
     <div class="form-group row">
       <div class="col-4">
         <%= f.label "注文ステータス" %>
       </div>
       <div class="col-4">
-        <%= f.select :status,[["入金待ち",0],["入金確認",1],["製作中",2],["発送準備中",3],["発送済み",4] %>
+
+        <%= f.select :status,Order.statuses.keys.to_a %>
       </div>
       <div class="col-auto ">
         <%= f.submit "更新" ,class:" btn btn-success" %>
       </div>
     </div>
     <% end %>
-    <div class="d-flex">
+    <div class="d-flex align_items_end ">
       <table class="table mt-3">
         <thead>
           <tr class="table-secondary">
@@ -48,28 +49,31 @@
             <th>数量</th>
             <th>小計</th>
             <th>製作ステータス</th>
+            <th></th>
           </tr>
         </thead>
-        <%= @orders.each do |order| %>
-        <%= form_with model:@order_item ,url:admin_order_item_path ,local: true do |f| %>
+        <% @total_price = 0 %>
+        <% @order_items.each do |order_item| %>
+        <%= form_with model: order_item ,url:admin_order_item_path(order_item) ,local: true do |f| %>
         <tr>
-          <td><%= order.order_items.item.name %></td>
-          <td><%= order.order_items.price %></td>
-          <td><%= order.order_items.amount %></td>
-          <td><%= order.order_items.@sub_total %></td>
-          <td><%= f.select :status,[["製作不可",0],["製作待ち",1],["製作中",2],["製作完了中",3] %></td>
+          <td><%= order_item.item.name %></td>
+          <td><%= (order_item.tax_price).to_s(:delimited) %></td>
+          <td><%= order_item.amount %></td>
+          <td><%= (order_item.tax_price.to_i*order_item.amount).to_s(:delimited) %></td>
+          <td><%= f.select :status,OrderItem.statuses.keys.to_a %></td>
+
           <td><%= f.submit "更新",class:" btn btn-success"%></td>
         </tr>
+        <% @total_price += order_item.tax_price.to_i*order_item.amount %>
         <% end %>
         <% end %>
       </table>
-      
-      <div class="total_price">
+      <div class="total_price row align-self-end ml-auto">
         <div class="col-6">
           <p>商品合計</p>
         </div>
         <div class="col-6">
-          <%=@order.total_price%>
+          <%=@total_price.to_s(:delimited)%>
         </div>
         <div class="col-6">
           <p>送料</p>
@@ -81,11 +85,9 @@
           <p>請求金額合計</p>
         </div>
         <div class="col-6">
-          <%=@order.total_price+@oreder.postage %>
+          <%= (@total_price+@order.postage).to_s(:delimited) %>
         </div>
       </div>
     </div>
-   
-
   </div>
  </div>

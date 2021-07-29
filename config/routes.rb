@@ -2,10 +2,6 @@ Rails.application.routes.draw do
   devise_for :admins, controllers:{
     sessions: 'admins/sessions'
   }
-   devise_scope :admins do
-    get "sign_in", :to => "admins/sessions#new"
-    get "sign_out", :to => "admins/sessions#destroy"
-  end
 
   devise_for :customers, skip: 'registrations'
   devise_scope :customer do

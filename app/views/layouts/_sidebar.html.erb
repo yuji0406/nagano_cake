@@ -5,6 +5,7 @@
         </p>
       </div>
        <% @genres.each do |genre| %>
+       <% form_with%>
       <div class="genre-box">
         <%= link_to genre.name,items_path ,class:"text-dark"%>
       </div>

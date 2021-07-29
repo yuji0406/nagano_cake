@@ -1,20 +1,16 @@
 class Admin::ItemsController < ApplicationController
-  layout 'admin'
+  before_action :authenticate_admin!
   def index
     @items=Item.page(params[:page]).per(10)
   end
 
   def new
-    @items=Item.new
+    @item=Item.new
 
   end
 
   def show
     @item=Item.find(params[:id])
-    @tax=1.1
-    @tax_price=@tax*@item.price
-
-
   end
 
   def edit
@@ -23,9 +19,9 @@ class Admin::ItemsController < ApplicationController
   end
 
   def create
-    @items=Item.new(item_params)
-    if @items.save
-      redirect_to admin_items_path
+    @item=Item.new(item_params)
+    if @item.save
+      redirect_to admin_item_path(@item)
     else
       render :new
     end

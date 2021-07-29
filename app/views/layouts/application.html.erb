@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <% if customer_signed_in? %>
+    <%= render 'layouts/public_header'%>
+    <% elsif %>
+    <% admin_signed_in? %>
+    <%= render 'layouts/admin_header'%>
+    <% else %>
     <header class="border bg-warning">
        <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -38,6 +44,7 @@
         </div>
       </nav>
     </header>
+    <% end %>
     <%= yield %>
   </body>
 </html>

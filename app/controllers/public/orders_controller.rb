@@ -1,6 +1,5 @@
 class Public::OrdersController < ApplicationController
-  layout 'public'
-
+  before_action :authenticate_customer!
 
   def new
     @order=Order.new
@@ -15,6 +14,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order=Order.find(params[:id])
+    @order_items=OrderItem.where(order_id: @order.id)
   end
 
   def confirm

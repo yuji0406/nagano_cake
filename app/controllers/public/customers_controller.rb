@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
-  layout 'public'
+  
+  before_action :authenticate_customer!
   def mypage
 
   end

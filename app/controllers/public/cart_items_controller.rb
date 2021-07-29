@@ -1,5 +1,6 @@
 class Public::CartItemsController < ApplicationController
-  layout 'public'
+
+before_action :authenticate_customer!
   def index
     @cart_items=current_customer.cart_items
 
@@ -26,7 +27,7 @@ class Public::CartItemsController < ApplicationController
   def create
     @cart_item=CartItem.new(cart_item_params)
     @cart_item.save!
-    redirect_to items_path
+    redirect_to cart_items_path
   end
 
   private

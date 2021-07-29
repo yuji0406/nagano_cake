@@ -1,42 +1,44 @@
 <div class="container">
   <h2 class="d-inline-block bg-light mt-3">ショッピングカート</h2>
-  <%= link_to "カートを空にする",cart_items_empty_path,method: :delete,class:"ml-auto btn btn-danger"%>
-  <table class="table">
+  <div class="text-right my-2">
+    <%= link_to "カートを空にする",cart_items_empty_path,method: :delete,class:"ml-auto btn btn-danger "%>
+  </div>
+  <table class="table-bordered w-100 my-2">
     <thead>
       <tr class="table-secondary">
-        <th>商品名</th>
-        <th>単価（税込）</th>
-        <th>数量</th>
-        <th>小計</th>
-        <th></th>
+        <th style="width: 40%">商品名</th>
+        <th style="width: 15%">単価（税込）</th>
+        <th style="width: 15%">数量</th>
+        <th style="width: 15%">小計</th>
+        <th style="width: 15%"></th>
       </tr>
     </thead>
     <% @total_price = 0 %>
     <% @cart_items.each do |cart_item|%>
     <%= form_with model: cart_item,url:cart_item_path(cart_item.id),local:true do |f| %>
     <tr>
-      <td><%= attachment_image_tag cart_item.item,:image,size:"100x100",format:'jpeg',fallback:"no_image.png"%>
+      <td><%= attachment_image_tag cart_item.item,:image,size:"100x50",format:'jpeg',fallback:"no_image.png"%>
           <%= cart_item.item.name %>
       </td>
-      <td><%= cart_item.item.price %></td>
+      <td><%= cart_item.item.tax_price.to_s(:delimited) %></td>
       <td><%= f.select :amount,options_for_select((1..20).to_a,cart_item.amount) %>
-          <%= f.submit"変更",class:"btn btn-success" %></td>
-      <td><%= (cart_item.amount)*(cart_item.item.price) %></td>
-      <td><%= link_to "削除する",cart_item_path(cart_item.id),method: :delete,class:"btn btn-danger" %></td>
+          <%= f.submit"変更",class:"btn btn-success ml-2" %></td>
+      <td><%= (cart_item.amount*cart_item.item.tax_price).to_s(:delimited) %></td>
+      <td class="text-center"><%= link_to "削除する",cart_item_path(cart_item.id),method: :delete,class:"btn btn-danger ml-2" %></td>
     </tr>
     <% end %>
-    <% @total_price += (cart_item.amount)*(cart_item.item.price) %>
+    <% @total_price += (cart_item.amount)*(cart_item.item.tax_price) %>
     <% end %>
   </table>
-  <div class="d-flex">
+  <div class="row">
     <%= link_to "買い物を続ける",items_path,class:"btn btn-primary mt-4" %>
-    <div class="ml-auto">
-    <table class="border".>
-      <tr>
-        <td class="table-secondary p-3">合計金額</td>
-        <td class="p-3"><%= (@total_price).to_i %></td>
-      </tr>
-    </table>
+    <div class="ml-auto col-4">
+      <table class="table-bordered w-100">
+        <tr>
+          <td class="table-secondary p-3">合計金額</td>
+          <td class="p-3"><%= (@total_price).to_s(:delimited) %></td>
+        </tr>
+      </table>
     </div>
   </div>
    <div class="text-center mt-4">
