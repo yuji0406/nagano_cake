@@ -6,9 +6,16 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
-    @order=Order.find(params[:id])
-    @order.update(order_params)
-    redirect_to admin_order_path(@order.id)
+    order=Order.find(params[:id])
+    if params[:order][:status] == "入金確認"
+      order.update(order_params)
+      order.order_items.each do |order_item|
+        order_item.update(status: "製作待ち")
+      end
+    else
+        order.update(order_params)
+    end
+    redirect_to admin_order_path(order.id)
   end
 
   private
@@ -16,5 +23,5 @@ class Admin::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:status)
   end
-  
+
 end
