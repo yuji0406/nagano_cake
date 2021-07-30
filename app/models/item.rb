@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   has_many :order_items
   belongs_to :genre
 
-  validates :genre_id,:name,:image_id,:introduction,:price,:is_active,presence: true
+  validates :genre_id,:name,:introduction,:price,presence: true
 
   def tax
     1.1

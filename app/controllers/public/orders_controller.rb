@@ -41,7 +41,7 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order=Order.new(order_params)
-    @order.save
+    if @order.save
     current_customer.cart_items.each do |cart_item|
       @order_item=OrderItem.new
       @order_item.amount=cart_item.amount
@@ -52,6 +52,9 @@ class Public::OrdersController < ApplicationController
     end
     current_customer.cart_items.destroy_all
     redirect_to orders_complete_path
+    else
+      render :new
+    end
   end
 
   private

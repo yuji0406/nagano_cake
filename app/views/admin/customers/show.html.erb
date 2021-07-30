@@ -13,53 +13,52 @@
     <div class="col-8">
       <%= @customer.full_name %>
     </div>
-  <div class="col-4">
+    <div class="col-4">
       <p>フリガナ</p>
     </div>
     <div class="col-8">
       <%= "#{@customer.last_name_kana}#{@customer.first_name_kana}" %>
     </div>
-  <div class="col-4">
+    <div class="col-4">
       <p>郵便番号</p>
     </div>
     <div class="col-8">
       <%= @customer.postal_code %>
     </div>
-  <div class="col-4">
+    <div class="col-4">
       <p>住所</p>
     </div>
     <div class="col-8">
       <%= @customer.address %>
     </div>
-  <div class="col-4">
+    <div class="col-4">
       <p>電話番号</p>
     </div>
     <div class="col-8">
       <%= @customer.telephone_number %>
     </div>
-  <div class="col-4">
+    <div class="col-4">
       <p>メールアドレス</p>
     </div>
     <div class="col-8">
       <%= @customer.email %>
     </div>
-  <div class="col-4">
+    <div class="col-4">
       <p>会員ステータス</p>
     </div>
     <div class="col-8">
-      <% if @customer.is_active == true %>
-        <p class="text-success">有効</p>
-        <% else %>
-        <p class="text-secondary">退会</p>
-        <% end %>
+    <% if @customer.is_active == true %>
+      <p class="text-success">有効</p>
+    <% else %>
+      <p class="text-secondary">退会</p>
+    <% end %>
     </div>
     <div class="col-4"></div>
-      <div class="col-auto py-1 px-2 mr-3">
+    <div class="col-auto py-1 px-2 mr-3">
       <%= link_to "編集する",edit_admin_customer_path,class:"btn btn-success"%>
-      </div>
-      <div class="col-auto py-1 px-2 mx-3">
+    </div>
+    <div class="col-auto py-1 px-2 mx-3">
       <%= link_to "注文履歴一覧を見る", admin_path(:customer_id => @customer.id), class:"btn btn-primary" %>
-      </div>
-
+    </div>
   </div>
- </div>
+</div>

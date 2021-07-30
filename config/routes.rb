@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions'
   }
 
-  devise_for :customers, skip: 'registrations'
+  devise_for :customers, skip: 'registrations',controllers:{
+    sessions: 'customers/sessions'
+  }
   devise_scope :customer do
     get 'customers/sign_up', :to => 'customers/registrations#new'
     post 'customers/sign_up', :to => 'customers/registrations#create'

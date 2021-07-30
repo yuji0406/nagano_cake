@@ -39,6 +39,7 @@
       </div>
     </div>
     <% end %>
+    
     <div class="d-flex align_items_end ">
       <table class="table mt-3">
         <thead>
@@ -60,13 +61,13 @@
           <td><%= order_item.amount %></td>
           <td><%= (order_item.tax_price.to_i*order_item.amount).to_s(:delimited) %></td>
           <td><%= f.select :status,OrderItem.statuses.keys.to_a %></td>
-
           <td><%= f.submit "更新",class:" btn btn-success"%></td>
         </tr>
         <% @total_price += order_item.tax_price.to_i*order_item.amount %>
         <% end %>
         <% end %>
       </table>
+      
       <div class="total_price row align-self-end ml-auto">
         <div class="col-6">
           <p>商品合計</p>
@@ -89,4 +90,4 @@
       </div>
     </div>
   </div>
- </div>
+</div>

@@ -1,73 +1,68 @@
 <div class="container mt-3">
     <h3 class="d-inline-block bg-light">会員情報編集</h3>
-      <%= form_with model:current_customer,url: customers_path,method: :patch,local: true do |f| %>
-      <div class="form-group row">
-        <div class="col-4">
-          <%= f.label "氏名",class:"label-form"%>
-        </div>
-        <div class="col-4">
-          <%= f.text_field :last_name,class:"form-control"%>
-        </div>
-        <div class="col-4">
-          <%= f.text_field :first_name,class:"form-control"%>
-        </div>
+    <%= form_with model:current_customer,url: customers_path,method: :patch,local: true do |f| %>
+    <div class="form-group row">
+      <div class="col-4">
+        <%= f.label "氏名",class:"label-form"%>
       </div>
-
-      <div class="form-group row">
-        <div class="col-4">
-          <%= f.label "フリガナ",class:"label-form"%>
-        </div>
-        <div class="col-4">
-          <%= f.text_field :last_name_kana,class:"form-control"%>
-        </div>
-        <div class="col-4">
-          <%= f.text_field :first_name_kana,class:"form-control"%>
-        </div>
+      <div class="col-4">
+        <%= f.text_field :last_name,class:"form-control"%>
       </div>
-
-      <div class="form-group row">
-        <div class="col-4">
-          <%= f.label "郵便番号（ハイフンなし）",class:"label-form"%>
-        </div>
-        <div class="col-4">
-          <%= f.text_field :postal_code,placeholder:"0000000",class:"form-control"%>
-        </div>
+      <div class="col-4">
+        <%= f.text_field :first_name,class:"form-control"%>
       </div>
-
-      <div class="form-group row">
-        <div class="col-4">
-          <%= f.label "住所",class:"label-form"%>
-        </div>
-        <div class="col-8">
-          <%= f.text_field :address,placeholder:"東京都渋谷区代々木神園町０−０",class:"form-control"%>
-        </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4">
+        <%= f.label "フリガナ",class:"label-form"%>
       </div>
-
-       <div class="form-group row">
-        <div class="col-4">
-          <%= f.label "電話番号",class:"label-form"%>
-        </div>
-        <div class="col-4">
-          <%= f.text_field :telephone_number,placeholder:"00000000000",class:"form-control"%>
-        </div>
+      <div class="col-4">
+        <%= f.text_field :last_name_kana,class:"form-control"%>
       </div>
-
-       <div class="form-group row">
-        <div class="col-4">
-      <%= f.label "メールアドレス",class:"label-form"%>
-        </div>
-        <div class="col-4">
-          <%= f.email_field :email,placeholder:"example@email.com",class:"form-control"%>
-        </div>
+      <div class="col-4">
+        <%= f.text_field :first_name_kana,class:"form-control"%>
       </div>
-      <div class="form-group row">
-        <div class="col-4"></div>
-        <div class="col-4">
-          <%= f.submit "編集内容を保存",class:"btn-block btn btn-success" %>
-        </div>
-        <div class="col-3">
-          <%= link_to"退会する",customers_check_path,class:"btn btn-block btn-danger" %>
-        </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4">
+        <%= f.label "郵便番号（ハイフンなし）",class:"label-form"%>
       </div>
-      <% end %>
+      <div class="col-4">
+        <%= f.text_field :postal_code,placeholder:"0000000",class:"form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4">
+        <%= f.label "住所",class:"label-form"%>
+      </div>
+      <div class="col-8">
+        <%= f.text_field :address,placeholder:"東京都渋谷区代々木神園町０−０",class:"form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4">
+        <%= f.label "電話番号",class:"label-form"%>
+      </div>
+      <div class="col-4">
+        <%= f.text_field :telephone_number,placeholder:"00000000000",class:"form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4">
+        <%= f.label "メールアドレス",class:"label-form"%>
+      </div>
+      <div class="col-4">
+        <%= f.email_field :email,placeholder:"example@email.com",class:"form-control"%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <%= f.submit "編集内容を保存",class:"btn-block btn btn-success" %>
+      </div>
+      <div class="col-3">
+        <%= link_to"退会する",customers_check_path,class:"btn btn-block btn-danger" %>
+      </div>
+    </div>
+    <% end %>
 </div>
